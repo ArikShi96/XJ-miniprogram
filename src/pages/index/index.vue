@@ -4,23 +4,49 @@
     <view>
       <text class="title">{{ title }}</text>
     </view>
-    <u-button type="primary">uView 按钮</u-button>
+    <u-button type="primary" @click="addUser">添加用户</u-button>
   </view>
 </template>
 
-<script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
-import commonApi from "@/global/service/commonService";
-
-@Component({}) //必须
-export default class Index extends Vue {
+<script>
+export default {
   onShow() {
-    let param = {};
-    commonApi.updateUser(param).then((res) => {
-      console.log(res);
-    });
-  }
-}
+    this.checkSession();
+  },
+  onHide() {},
+  data() {
+    return {};
+  },
+  methods: {
+    async addUser() {
+      // 插入用户
+      const db = wx.cloud.database();
+      db.collection("users").add({
+        data: {
+          name: "微信用户",
+          open_id: this.openid,
+        },
+        success: function(res) {
+          console.log(res);
+        },
+      });
+    },
+    // 获取登录状态
+    checkSession() {
+      if (!getApp().globalData.openid) {
+        uni.redirectTo({
+          url: "/pages/login/index",
+          success(res) {
+            console.log(res);
+          },
+          fail(err) {
+            console.log(err);
+          },
+        });
+      }
+    },
+  },
+};
 </script>
 
 <style>

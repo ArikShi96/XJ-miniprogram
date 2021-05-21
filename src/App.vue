@@ -1,15 +1,15 @@
-<script lang="ts">
+<script>
 import Vue from "vue";
 export default Vue.extend({
   mpType: "app",
-  onLaunch() {
-    console.log("App Launch");
-  },
-  onShow() {
-    console.log("App Show");
-  },
-  onHide() {
-    console.log("App Hide");
+  onLaunch() {},
+  onShow() {},
+  onHide() {},
+  onError() {},
+  globalData: {
+    code: "", // 换openid
+    openid: "",
+    user: "",
   },
 });
 </script>
