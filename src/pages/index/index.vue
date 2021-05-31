@@ -1,75 +1,79 @@
 <template>
   <view class="content">
-    <image class="logo" src="../../static/logo.png"></image>
-    <view>
-      <text class="title">{{ title }}</text>
+    <view
+      class="item"
+      v-for="item in list"
+      :key="item.text"
+      @click="navigate(item.url)"
+    >
+      <image class="logo" :src="item.icon" />
+      <text>{{ item.text }}</text>
     </view>
-    <u-button type="primary" @click="addUser">添加用户</u-button>
   </view>
 </template>
 
 <script>
+import PasswordIcon from "@/static/img/icon/password.png";
+import MemoIcon from "@/static/img/icon/memo.png";
+import WaitingIcon from "@/static/img/icon/waiting.png";
 export default {
   onShow() {
-    this.checkSession();
+    // this.checkSession();
   },
   onHide() {},
   data() {
-    return {};
+    return {
+      list: [
+        { icon: PasswordIcon, text: "密码管理", url: "/pages/password/index" },
+        { icon: MemoIcon, text: "便签功能", url: "/pages/memo/index" },
+        { icon: WaitingIcon, text: "敬请期待" },
+        { icon: WaitingIcon, text: "敬请期待" },
+        { icon: WaitingIcon, text: "敬请期待" },
+        { icon: WaitingIcon, text: "敬请期待" },
+        { icon: WaitingIcon, text: "敬请期待" },
+        { icon: WaitingIcon, text: "敬请期待" },
+      ],
+    };
   },
   methods: {
-    async addUser() {
-      // 插入用户
-      const db = wx.cloud.database();
-      db.collection("users").add({
-        data: {
-          name: "微信用户",
-          open_id: this.openid,
-        },
-        success: function(res) {
-          console.log(res);
-        },
-      });
-    },
     // 获取登录状态
     checkSession() {
       if (!getApp().globalData.openid) {
         uni.redirectTo({
           url: "/pages/login/index",
-          success(res) {
-            console.log(res);
-          },
-          fail(err) {
-            console.log(err);
-          },
         });
       }
+    },
+    // 跳转
+    navigate(url) {
+      if (!url) {
+        return;
+      }
+      uni.navigateTo({
+        url,
+      });
     },
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin: 200rpx auto 50rpx auto;
-}
-
-.text-area {
-  display: flex;
-  justify-content: center;
-}
-
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
+  flex-wrap: wrap;
+  padding: 64rpx 0;
+  .item {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32rpx 0;
+    .logo {
+      width: 80rpx;
+      height: 80rpx;
+      margin-bottom: 16prx;
+    }
+  }
 }
 </style>

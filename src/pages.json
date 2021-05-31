@@ -6,19 +6,55 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "首页"
 			}
 		},
 		{
 			"path": "pages/login/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/password/index",
+			"style": {
+				"navigationBarTitleText": "密码管理"
+			}
+		},
+		{
+			"path": "pages/password/add",
+			"style": {
+				"navigationBarTitleText": "添加密码"
+			}
+		},
+		{
+			"path": "pages/memo/index",
+			"style": {
+				"navigationBarTitleText": "便签管理"
+			}
+		},
+		{
+			"path": "pages/memo/add",
+			"style": {
+				"navigationBarTitleText": "添加便签"
+			}
+		},
+		{
+			"path": "pages/memo/show",
+			"style": {
+				"navigationBarTitleText": "便签详情"
+			}
+		},
+		{
+			"path": "pages/memo/edit",
+			"style": {
+				"navigationBarTitleText": "编辑便签"
 			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "首页",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}
