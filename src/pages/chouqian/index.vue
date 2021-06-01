@@ -13,6 +13,7 @@
         <view class="title">
           <text>{{ `内容${index + 1}` }}</text>
           <image
+            v-if="index === list.length - 1"
             class="icon remove"
             :src="RemoveIcon"
             @click="clickRemove(index)"

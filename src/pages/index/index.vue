@@ -16,10 +16,11 @@
 import PasswordIcon from "@/static/img/icon/password.png";
 import MemoIcon from "@/static/img/icon/memo.png";
 import ChoujiangIcon from "@/static/img/icon/抽奖.png";
+import RememberIcon from "@/static/img/icon/纪念日.png";
 import WaitingIcon from "@/static/img/icon/waiting2.png";
 export default {
   onShow() {
-    this.checkSession();
+    // this.checkSession();
   },
   onHide() {},
   data() {
@@ -28,7 +29,7 @@ export default {
         { icon: PasswordIcon, text: "密码管理", url: "/pages/password/index" },
         { icon: MemoIcon, text: "便签", url: "/pages/memo/index" },
         { icon: ChoujiangIcon, text: "抽签", url: "/pages/chouqian/index" },
-        { icon: WaitingIcon, text: "敬请期待" },
+        { icon: RememberIcon, text: "纪念日", url: "/pages/remember/index" },
         { icon: WaitingIcon, text: "敬请期待" },
         { icon: WaitingIcon, text: "敬请期待" },
         { icon: WaitingIcon, text: "敬请期待" },

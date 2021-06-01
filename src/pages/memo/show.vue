@@ -24,6 +24,8 @@ import EditIcon from "@/static/img/icon/edit.png";
 export default {
   onLoad(options) {
     this.uuid = options.id;
+  },
+  onShow() {
     this.fetchDetail();
   },
   data() {

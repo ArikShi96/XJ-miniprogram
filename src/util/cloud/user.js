@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 // 登录
 export function login() {
   wx.cloud.init();
@@ -50,4 +51,37 @@ export function getUserProfile() {
       },
     });
   });
+}
+// 储存当前用户信息
+export async function userAddOrUpdate(data) {
+  wx.cloud.init();
+  const db = wx.cloud.database();
+  const res = await db
+    .collection("users")
+    .where({
+      uuid: data.uuid,
+    })
+    .get();
+  if (res.data.length) {
+    // 更新
+    return db
+      .collection("users")
+      .where({
+        uuid: data.uuid,
+      })
+      .update({
+        data: {
+          ...data,
+          updatedAt: dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+        },
+      });
+  } else {
+    // 新增
+    return db.collection("users").add({
+      data: {
+        ...data,
+        createdAt: dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+      },
+    });
+  }
 }

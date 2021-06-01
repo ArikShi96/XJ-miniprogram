@@ -7,7 +7,7 @@
           class="uni-input"
           name="title"
           placeholder="请输入标题"
-          v-model="detail.title"
+          :value="initTitle"
         />
       </view>
       <view class="uni-form-item uni-column">
@@ -17,7 +17,7 @@
           name="content"
           placeholder="请输入内容,最大长度为200个字符"
           :maxlength="200"
-          v-model="detail.content"
+          :value="initContent"
         />
       </view>
       <view class="uni-form-item uni-column">
@@ -57,7 +57,7 @@ export default {
     this.fetchDetail();
   },
   data() {
-    return { loading: false, imageList: [] };
+    return { loading: false, initTitle: "", initContent: "", imageList: [] };
   },
   methods: {
     async fetchDetail() {
@@ -66,6 +66,8 @@ export default {
       });
       const res = await memoList({ uuid: this.uuid });
       this.detail = res.data[0] || {};
+      this.initTitle = this.detail.title;
+      this.initContent = this.detail.content;
       this.imageList = this.detail.images.split(",");
       uni.hideLoading();
     },

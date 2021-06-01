@@ -56,6 +56,18 @@
 			"style": {
 				"navigationBarTitleText": "抽签"
 			}
+		},
+		{
+			"path": "pages/remember/index",
+			"style": {
+				"navigationBarTitleText": "纪念日"
+			}
+		},
+		{
+			"path": "pages/remember/add",
+			"style": {
+				"navigationBarTitleText": "添加纪念日"
+			}
 		}
 	],
 	"globalStyle": {
