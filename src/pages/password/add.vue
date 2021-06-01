@@ -3,11 +3,11 @@
     <form @submit="formSubmit" @reset="formReset">
       <view class="uni-form-item uni-column">
         <view class="title">标题</view>
-        <input class="uni-input" name="title" placeholder="输入标题" />
+        <input class="uni-input" name="title" placeholder="请输入标题" />
       </view>
       <view class="uni-form-item uni-column">
         <view class="title">密码</view>
-        <input class="uni-input" name="password" placeholder="输入密码" />
+        <input class="uni-input" name="password" placeholder="请输入密码" />
       </view>
       <view class="uni-form-item uni-column">
         <view class="title"
@@ -63,7 +63,7 @@ export default {
       const errorMessage = await this.validate({ title, password });
       if (errorMessage) {
         uni.showToast({
-          icon: "error",
+          icon: "none",
           title: errorMessage,
           duration: 1000,
         });
@@ -84,7 +84,7 @@ export default {
         }, 1000);
       } catch (err) {
         uni.showToast({
-          icon: "error",
+          icon: "none",
           title: "添加失败",
           duration: 1000,
         });

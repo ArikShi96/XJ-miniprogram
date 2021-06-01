@@ -75,7 +75,7 @@ export default {
       const errorMessage = await this.validate({ title, content });
       if (errorMessage) {
         uni.showToast({
-          icon: "error",
+          icon: "none",
           title: errorMessage,
           duration: 1000,
         });
@@ -99,7 +99,7 @@ export default {
         }, 1000);
       } catch (err) {
         uni.showToast({
-          icon: "error",
+          icon: "none",
           title: "添加失败",
           duration: 1000,
         });

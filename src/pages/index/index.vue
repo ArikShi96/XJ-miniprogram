@@ -15,18 +15,19 @@
 <script>
 import PasswordIcon from "@/static/img/icon/password.png";
 import MemoIcon from "@/static/img/icon/memo.png";
+import ChoujiangIcon from "@/static/img/icon/抽奖.png";
 import WaitingIcon from "@/static/img/icon/waiting2.png";
 export default {
   onShow() {
-    // this.checkSession();
+    this.checkSession();
   },
   onHide() {},
   data() {
     return {
       list: [
         { icon: PasswordIcon, text: "密码管理", url: "/pages/password/index" },
-        { icon: MemoIcon, text: "便签功能", url: "/pages/memo/index" },
-        { icon: WaitingIcon, text: "敬请期待" },
+        { icon: MemoIcon, text: "便签", url: "/pages/memo/index" },
+        { icon: ChoujiangIcon, text: "抽签", url: "/pages/chouqian/index" },
         { icon: WaitingIcon, text: "敬请期待" },
         { icon: WaitingIcon, text: "敬请期待" },
         { icon: WaitingIcon, text: "敬请期待" },

@@ -71,7 +71,7 @@ export default {
         this.fetchList();
       } catch (err) {
         uni.showToast({
-          icon: "error",
+          icon: "none",
           title: "删除失败",
           duration: 1000,
         });

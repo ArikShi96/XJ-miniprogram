@@ -50,6 +50,12 @@
 			"style": {
 				"navigationBarTitleText": "编辑便签"
 			}
+		},
+		{
+			"path": "pages/chouqian/index",
+			"style": {
+				"navigationBarTitleText": "抽签"
+			}
 		}
 	],
 	"globalStyle": {
