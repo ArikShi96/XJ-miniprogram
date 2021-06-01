@@ -95,7 +95,7 @@ export default {
     padding: 20rpx 40rpx;
     border-bottom: 1px solid $uni-border-color;
     .label {
-      color: $uni-text-color-grey;
+      color: $uni-text-color;
     }
     .value {
       color: $uni-text-color;

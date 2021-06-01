@@ -59,7 +59,7 @@ export default {
     font-size: 32rpx;
   }
   .value {
-    margin-bottom: 16rpx;
+    margin-bottom: 32rpx;
     &.image-list {
       image {
         width: 100%;

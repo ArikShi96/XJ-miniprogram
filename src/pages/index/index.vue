@@ -15,7 +15,7 @@
 <script>
 import PasswordIcon from "@/static/img/icon/password.png";
 import MemoIcon from "@/static/img/icon/memo.png";
-import WaitingIcon from "@/static/img/icon/waiting.png";
+import WaitingIcon from "@/static/img/icon/waiting2.png";
 export default {
   onShow() {
     // this.checkSession();
