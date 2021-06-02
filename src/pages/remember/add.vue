@@ -14,34 +14,20 @@
         <input class="uni-input" name="address" placeholder="请输入纪念地点" />
       </view>
       <view class="uni-form-item uni-column">
-        <view class="title">日期</view>
+        <view class="title">纪念日期</view>
         <!-- <uni-datetime-picker name="date"></uni-datetime-picker> -->
         <picker mode="date" name="date" :end="endDate" @change="changeDate">
           <text class="picker-label">{{ date || "选择时间" }}</text>
         </picker>
       </view>
       <view class="uni-form-item uni-column">
-        <view class="title">是否打开提醒</view>
+        <view class="title">是否提醒</view>
         <switch
           class="switch"
           checked
           name="notify"
           style="transform:translateX(-16rpx) scale(0.7)"
         />
-      </view>
-      <view class="uni-form-item uni-column">
-        <view class="title">提前多少天提醒</view>
-        <picker
-          mode="selector"
-          name="advance"
-          :range="range"
-          :value="0"
-          @change="changeAdvavnce"
-        >
-          <text class="picker-label">{{
-            advance ? `${advance}天` : "选择提前多少天提醒"
-          }}</text>
-        </picker>
       </view>
       <view class="uni-btn-v">
         <button
@@ -62,10 +48,11 @@ import { rememberAdd, rememberList } from "@/util/cloud/remember.js";
 import { uniDatetimePicker } from "@dcloudio/uni-ui";
 import { subscribeMsg } from "@/util/cloud/subcribe.js";
 import dayjs from "dayjs";
+import { generateUuid } from "@/util/util.js";
 export default {
   components: { uniDatetimePicker },
   data() {
-    return { loading: false, date: "", advance: "", range: [10, 5, 3, 1] };
+    return { loading: false, date: "" };
   },
   computed: {
     endDate() {
@@ -77,9 +64,6 @@ export default {
   methods: {
     changeDate(event) {
       this.date = event.detail.value;
-    },
-    changeAdvavnce(event) {
-      this.advance = this.range[event.detail.value];
     },
     async validate({ title, date, people, address }) {
       if (!title) {
@@ -104,7 +88,7 @@ export default {
     },
     async formSubmit(e) {
       const formdata = e.detail.value;
-      const { title, date, advance, notify, people, address } = formdata;
+      const { title, date, notify, people, address } = formdata;
       const errorMessage = await this.validate({
         title,
         date,
@@ -121,11 +105,11 @@ export default {
       }
       this.loading = true;
       const data = {
+        uuid: generateUuid(),
         title,
         date,
         people,
         address,
-        advance: this.range[advance],
         notify,
       };
       try {

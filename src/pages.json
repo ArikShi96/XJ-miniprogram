@@ -64,6 +64,12 @@
 			}
 		},
 		{
+			"path": "pages/remember/show",
+			"style": {
+				"navigationBarTitleText": "纪念日详情"
+			}
+		},
+		{
 			"path": "pages/remember/add",
 			"style": {
 				"navigationBarTitleText": "添加纪念日"

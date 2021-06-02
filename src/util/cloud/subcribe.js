@@ -11,7 +11,7 @@ export function subscribeMsg(data) {
             tmplIds: [tmplId],
             success(res) {
               if (res[tmplId] == "accept") {
-                cloudSendMsg(data);
+                // cloudSendMsg(data); 立即发送消息，先不调用
                 resolve();
               } else if (res[tmplId] == "reject") {
                 uni.showToast({

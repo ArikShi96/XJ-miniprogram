@@ -75,7 +75,7 @@ export default {
       const self = this;
       wx.chooseImage({
         success: async function(res) {
-          const response = await upload(res.tempFilePaths[0]);
+          const response = await upload(res.tempFilePaths[0], "memo");
           self.imageList.push(response.fileID);
         },
       });

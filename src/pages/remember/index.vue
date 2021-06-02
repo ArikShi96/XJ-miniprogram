@@ -4,7 +4,7 @@
       <view v-for="(item, index) in list" :key="index" class="item">
         <text class="label">{{ `${item.title}` }}</text>
         <view class="value">
-          <text>{{ downTime(item) }}</text>
+          <text @click="navigateDetail(item.uuid)">{{ downTime(item) }}</text>
           <image
             class="icon"
             :src="RemoveIcon"
@@ -78,7 +78,11 @@ export default {
         url: "/pages/remember/add",
       });
     },
-    navigateEdit() {},
+    navigateDetail(uuid) {
+      uni.navigateTo({
+        url: `/pages/remember/show?id=${uuid}`,
+      });
+    },
     downTime(item) {
       let date = dayjs(item.date);
       let yearGap = 0;
