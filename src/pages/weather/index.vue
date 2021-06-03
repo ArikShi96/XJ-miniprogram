@@ -5,15 +5,23 @@
         v-for="(item, index) in list"
         :key="index"
         class="item"
-        @click="navigateDetail(item.uuid)"
+        @click="navigateDetail(item.id)"
       >
-        <text class="label">{{ `${item.title}` }}</text>
+        <text class="label">
+          {{ `${item.adm1} - ${item.adm2} - ${item.name}` }}
+        </text>
         <view class="value">
-          <text>{{ downTime(item) }}</text>
+          <switch
+            class="switch"
+            :checked="item.notify"
+            style="transform:translateX(-16rpx) scale(0.7)"
+            @click.stop=""
+            @change.stop="handleChange($event, item.uuid)"
+          />
           <image
             class="icon"
             :src="RemoveIcon"
-            @click.stop="handleRemove(item.title)"
+            @click.stop="handleRemove(item.uuid)"
           />
         </view>
       </view>
@@ -25,8 +33,13 @@
 <script>
 import AddIcon from "@/static/img/icon/add.png";
 import RemoveIcon from "@/static/img/icon/remove.png";
-import { rememberList, rememberRemove } from "@/util/cloud/remember.js";
-import dayjs from "dayjs";
+import {
+  weatherList,
+  weatherRemove,
+  weatherUpdate,
+} from "@/util/cloud/weather.js";
+import { subscribeMsg } from "@/util/cloud/subcribe.js";
+const tmplId = "9Ng25oXuoF-HyilFkGd87Pe6FAIVAUeyS7w5EYX87WY";
 export default {
   async onLoad() {},
   async onShow() {
@@ -44,27 +57,37 @@ export default {
       uni.showLoading({
         title: "加载中",
       });
-      const res = await rememberList();
+      const res = await weatherList();
       this.list = res.data;
       uni.hideLoading();
     },
-    handleRemove(title) {
+    async handleChange(event, uuid) {
+      try {
+        if (event.target.value) {
+          await subscribeMsg(tmplId);
+        }
+        await weatherUpdate(uuid, {
+          notify: event.target.value,
+        });
+      } catch (err) {}
+    },
+    handleRemove(uuid) {
       const self = this;
       uni.showModal({
         title: "温馨提示",
         content: "是否要删除这条数据?",
         success(res) {
           if (res.confirm) {
-            self.removeRemember(title);
+            self.removeWeather(uuid);
           } else if (res.cancel) {
             return;
           }
         },
       });
     },
-    async removeRemember(title) {
+    async removeWeather(uuid) {
       try {
-        await rememberRemove(title);
+        await weatherRemove(uuid);
         uni.showToast({
           title: "删除成功",
           duration: 1000,
@@ -80,24 +103,13 @@ export default {
     },
     navigateAdd() {
       uni.navigateTo({
-        url: "/pages/remember/add",
+        url: `/pages/weather/add`,
       });
     },
-    navigateDetail(uuid) {
+    navigateDetail(locationId) {
       uni.navigateTo({
-        url: `/pages/remember/show?id=${uuid}`,
+        url: `/pages/weather/show?id=${locationId}`,
       });
-    },
-    downTime(item) {
-      let date = dayjs(item.date);
-      let yearGap = 0;
-      let dayGap = date.diff(dayjs(new Date()), "day");
-      while (dayGap < 0) {
-        date = date.add(1, "year");
-        dayGap = date.diff(dayjs(new Date()), "day");
-        yearGap += 1;
-      }
-      return `距离${yearGap}周年还有${dayGap}天`;
     },
   },
 };

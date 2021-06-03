@@ -10,8 +10,8 @@
         <textarea
           class="uni-textarea"
           name="content"
-          placeholder="请输入内容,最大长度为200个字符"
-          :maxlength="200"
+          placeholder="请输入内容,最大长度为2000个字符"
+          :maxlength="2000"
         />
       </view>
       <view class="uni-form-item uni-column">

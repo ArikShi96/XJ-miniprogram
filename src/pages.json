@@ -74,6 +74,24 @@
 			"style": {
 				"navigationBarTitleText": "添加纪念日"
 			}
+		},
+		{
+			"path": "pages/weather/index",
+			"style": {
+				"navigationBarTitleText": "天气"
+			}
+		},
+		{
+			"path": "pages/weather/add",
+			"style": {
+				"navigationBarTitleText": "添加天气"
+			}
+		},
+		{
+			"path": "pages/weather/show",
+			"style": {
+				"navigationBarTitleText": "天气详情"
+			}
 		}
 	],
 	"globalStyle": {

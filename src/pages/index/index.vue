@@ -17,6 +17,7 @@ import PasswordIcon from "@/static/img/icon/password.png";
 import MemoIcon from "@/static/img/icon/memo.png";
 import ChoujiangIcon from "@/static/img/icon/抽奖.png";
 import RememberIcon from "@/static/img/icon/纪念日.png";
+import WeatherIcon from "@/static/img/icon/weather.png";
 import WaitingIcon from "@/static/img/icon/waiting2.png";
 export default {
   onShow() {
@@ -30,7 +31,7 @@ export default {
         { icon: MemoIcon, text: "便签", url: "/pages/memo/index" },
         { icon: ChoujiangIcon, text: "抽签", url: "/pages/chouqian/index" },
         { icon: RememberIcon, text: "纪念日", url: "/pages/remember/index" },
-        { icon: WaitingIcon, text: "敬请期待" },
+        { icon: WeatherIcon, text: "天气", url: "/pages/weather/index" },
         { icon: WaitingIcon, text: "敬请期待" },
         { icon: WaitingIcon, text: "敬请期待" },
         { icon: WaitingIcon, text: "敬请期待" },
@@ -75,6 +76,7 @@ export default {
       width: 80rpx;
       height: 80rpx;
       margin-bottom: 16prx;
+      border-radius: 40rpx;
     }
   }
 }

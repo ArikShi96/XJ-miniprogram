@@ -72,7 +72,7 @@ const request = <T>(method: UniApp.RequestOptions['method'], url: string, data: 
             reject(resData);
           }
           else {
-            resolve(resData.data);
+            resolve(resData as any);
           }
         } else {
           reject(resData.msg);

@@ -1,6 +1,5 @@
 // 订阅消息
-export function subscribeMsg(data) {
-  let tmplId = "9Ng25oXuoF-HyilFkGd87Pe6FAIVAUeyS7w5EYX87WY";
+export function subscribeMsg(tmplId) {
   return new Promise((resolve, reject) => {
     uni.showModal({
       title: "温馨提示",
@@ -11,7 +10,6 @@ export function subscribeMsg(data) {
             tmplIds: [tmplId],
             success(res) {
               if (res[tmplId] == "accept") {
-                // cloudSendMsg(data); 立即发送消息，先不调用
                 resolve();
               } else if (res[tmplId] == "reject") {
                 uni.showToast({

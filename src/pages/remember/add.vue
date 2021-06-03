@@ -49,6 +49,7 @@ import { uniDatetimePicker } from "@dcloudio/uni-ui";
 import { subscribeMsg } from "@/util/cloud/subcribe.js";
 import dayjs from "dayjs";
 import { generateUuid } from "@/util/util.js";
+const tmplId = "9Ng25oXuoF-HyilFkGd87Pe6FAIVAUeyS7w5EYX87WY";
 export default {
   components: { uniDatetimePicker },
   data() {
@@ -132,7 +133,7 @@ export default {
     async subscribe(data) {
       try {
         if (data.notify) {
-          await subscribeMsg({ ...data, remark: data.title });
+          await subscribeMsg(tmplId);
         }
       } catch (err) {}
       setTimeout(() => {
