@@ -19,7 +19,7 @@
         @click="checked = item"
       >
         <text>
-          {{ `${item.adm1} - ${item.adm2} - ${item.name}` }}
+          {{ `${item.adm1}-${item.adm2}-${item.name}` }}
         </text>
         <text class="tip">{{ item.id }}</text>
       </view>

@@ -8,7 +8,7 @@
         @click="navigateDetail(item.id)"
       >
         <text class="label">
-          {{ `${item.adm1} - ${item.adm2} - ${item.name}` }}
+          {{ `${item.adm1}-${item.adm2}-${item.name}` }}
         </text>
         <view class="value">
           <switch

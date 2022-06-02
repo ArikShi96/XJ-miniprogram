@@ -16,6 +16,18 @@
 			}
 		},
 		{
+			"path": "pages/admin/index",
+			"style": {
+				"navigationBarTitleText": "管理员界面"
+			}
+		},
+		{
+			"path": "pages/maicai/index",
+			"style": {
+				"navigationBarTitleText": "买菜比价"
+			}
+		},
+		{
 			"path": "pages/password/index",
 			"style": {
 				"navigationBarTitleText": "密码管理"

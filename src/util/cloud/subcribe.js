@@ -43,9 +43,9 @@ export function subscribeMsg(tmplId) {
   });
 }
 // 云函数-消息推送
-export function cloudSendMsg(data) {
+export function cloudSendMsg(name, data = {}) {
   return wx.cloud.callFunction({
-    name: "sendTemplateMessage",
+    name,
     data,
   });
 }

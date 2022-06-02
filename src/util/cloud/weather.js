@@ -17,6 +17,7 @@ export async function cityList(location) {
     return [];
   }
 }
+
 export async function realtimeWeather(locationId) {
   if (!locationId) {
     return {};
@@ -30,6 +31,7 @@ export async function realtimeWeather(locationId) {
     return {};
   }
 }
+
 export async function threeDaysWeather(locationId) {
   if (!locationId) {
     return {};
