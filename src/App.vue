@@ -10,6 +10,11 @@ export default Vue.extend({
     code: "", // 换openid
     openid: "",
     user: "",
+    location: {
+      // latitude: "", // 纬度，浮点数，范围为-90~90，负数表示南纬
+      // longitude: "", // 经度，浮点数，范围为-180~180，负数表示西经
+      // accuracy: "", // 位置的精确度
+    },
   },
 });
 </script>

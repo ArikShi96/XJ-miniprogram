@@ -131,7 +131,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .content {
-  padding: 40rpx;
+  padding: 20rpx;
   .uni-form-item {
     margin-bottom: 32rpx;
   }

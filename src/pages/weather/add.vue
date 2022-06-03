@@ -93,7 +93,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .content {
-  padding: 40rpx;
+  padding: 20rpx;
   .search-wrap {
     display: flex;
     align-items: center;

@@ -26,7 +26,7 @@ import RememberIcon from "@/static/img/icon/纪念日.png";
 import WeatherIcon from "@/static/img/icon/weather.png";
 import WaitingIcon from "@/static/img/icon/waiting2.png";
 import AdminIcon from "@/static/img/icon/admin.png";
-import MaiCaiIcon from "@/static/img/icon/买菜.svg";
+import MaiCaiIcon from "@/static/img/icon/买菜.png";
 export default {
   onShow() {
     // this.checkSession();
@@ -84,7 +84,7 @@ export default {
 .content {
   display: flex;
   flex-wrap: wrap;
-  padding: 64rpx 0;
+  padding: 20rpx 0;
   .item {
     flex: 0 0 25%;
     display: flex;

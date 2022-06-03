@@ -45,6 +45,11 @@
         "appid": "wx6c7085145e627211",
         "setting": {
             "urlCheck": true
+        },
+        "permission": {
+            "scope.userLocation": {
+                "desc": "请点击确定"
+            }
         }
     },
     "mp-alipay": {

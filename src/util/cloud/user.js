@@ -85,3 +85,16 @@ export async function userAddOrUpdate(data) {
     });
   }
 }
+// 获取用户当前位置
+export function getUserLocation() {
+  return new Promise((resolve, reject) => {
+    uni.getLocation({
+      success(res) {
+        resolve(res)
+      },
+      fail(err){
+        reject(err)
+      }
+    });
+  });
+}
