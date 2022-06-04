@@ -10,7 +10,7 @@ export async function getLocalStorage(key) {
         resolve(JSON.parse(res.data));
       },
       fail(err) {
-        reject(err);
+        resolve(null);
       },
     });
   });

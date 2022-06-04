@@ -20,7 +20,7 @@
     </view>
     <u-divider>每日鸡汤</u-divider>
     <view class="section text">
-      {{ jitang }}
+      {{ jitang || "暂无" }}
     </view>
     <u-divider>每日热点</u-divider>
     <view class="section">
@@ -85,7 +85,7 @@ export default {
     // await this.checkSession();
     const homePageData = (await getLocalStorage(this.today)) || {};
     let { history, news, jitang } = homePageData;
-    if (!history || !news || !jitang) {
+    if (!history) {
       jitang = await this.fetchHomepageTodayJiTang();
       history = await this.fetchHomepageTodayHistory();
       news = await this.fetchHomepageTodayNews();
