@@ -2,9 +2,9 @@
   <view class="content">
     <u-divider>当前天气</u-divider>
     <view class="title">当前天气</view>
-    <view class="value last">{{ detail.text }}</view>
+    <view class="value last">{{ detail.text || "" }}</view>
     <view class="title">当前气温</view>
-    <view class="value last">{{ detail.temp }}℃</view>
+    <view class="value last">{{ detail.temp || "" }}℃</view>
     <u-divider>3日天气</u-divider>
     <view v-for="day in daysDetail">
       <view class="title">{{ day.fxDate }}</view>
