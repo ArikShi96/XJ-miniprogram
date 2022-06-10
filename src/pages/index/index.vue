@@ -4,8 +4,8 @@
     <view class="list">
       <view
         class="item"
-        v-for="item in list"
-        :key="item.text"
+        v-for="(item, index) in list"
+        :key="index"
         @click="navigate(item.url)"
       >
         <image class="logo" :src="item.icon" />

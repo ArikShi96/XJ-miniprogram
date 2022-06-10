@@ -4,29 +4,19 @@
     <view class="title">当前天气</view>
     <view class="value">{{ detail.text || "" }}</view>
     <view class="image-list last">
-      <image
-        v-if="iconMap[detail.text]"
-        class="image"
-        :src="iconMap[detail.text]"
-      />
+      <image v-if="iconMap[detail.text]" class="image" :src="iconMap[detail.text]" />
     </view>
     <view class="title">当前气温</view>
     <view class="value last">{{ detail.temp || "" }}℃</view>
     <u-divider>3日天气</u-divider>
-    <view v-for="day in daysDetail">
+    <view v-for="day in daysDetail" :key="day.fxDate">
       <view class="title">{{ day.fxDate }}</view>
       <view class="value">气温: {{ day.tempMin }}℃ - {{ day.tempMax }}℃</view>
       <view class="value">天气: {{ day.textDay }}转{{ day.textNight }}</view>
       <view class="image-list">
-        <image
-          v-if="iconMap[day.textDay]"
-          class="image"
-          :src="iconMap[day.textDay]"
-        />
+        <image v-if="iconMap[day.textDay]" class="image" :src="iconMap[day.textDay]" />
       </view>
-      <view class="value last">
-        日出时间: {{ day.sunrise }} — {{ day.sunset }}
-      </view>
+      <view class="value last"> 日出时间: {{ day.sunrise }} — {{ day.sunset }} </view>
     </view>
   </view>
 </template>
@@ -59,7 +49,20 @@ export default {
       id: "",
       detail: {},
       daysDetail: [],
-      iconMap: { 暴雨, 大暴雨, 大雨, 多云, 雷雨, 晴, 小雨, 雪, 阴, 中雨 },
+      iconMap: {
+        暴雨,
+        大暴雨,
+        大雨,
+        多云,
+        雷雨,
+        雷阵雨: 雷雨,
+        晴,
+        小雨,
+        雪,
+        阴,
+        中雨,
+        阵雨: 小雨,
+      },
     };
   },
   methods: {
