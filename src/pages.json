@@ -28,6 +28,12 @@
 			}
 		},
 		{
+			"path": "pages/food/index",
+			"style": {
+				"navigationBarTitleText": "菜谱"
+			}
+		},
+		{
 			"path": "pages/yiqing/index",
 			"style": {
 				"navigationBarTitleText": "疫情相关"

@@ -82,6 +82,7 @@ import WaitingIcon from "@/static/img/icon/waiting2.png";
 import AdminIcon from "@/static/img/icon/admin.png";
 import MaiCaiIcon from "@/static/img/icon/买菜.png";
 import YiQingIcon from "@/static/img/icon/疫情.png";
+import FoodIcon from "@/static/img/icon/菜谱.png";
 export default {
   async onShow() {
     uni.showLoading({
@@ -108,12 +109,12 @@ export default {
       list: [
         { icon: YiQingIcon, text: "疫情相关", url: "/pages/yiqing/index" },
         { icon: MaiCaiIcon, text: "买菜比价", url: "/pages/maicai/index" },
+        { icon: FoodIcon, text: "菜谱", url: "/pages/food/index" },
         { icon: WeatherIcon, text: "天气", url: "/pages/weather/index" },
         { icon: PasswordIcon, text: "密码管理", url: "/pages/password/index" },
         { icon: MemoIcon, text: "便签", url: "/pages/memo/index" },
         { icon: ChoujiangIcon, text: "抽签", url: "/pages/chouqian/index" },
         { icon: RememberIcon, text: "纪念日", url: "/pages/remember/index" },
-        { icon: WaitingIcon, text: "敬请期待" },
       ],
       // 首页数据
       history: [],
