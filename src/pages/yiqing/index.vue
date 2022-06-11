@@ -6,8 +6,58 @@
       :current="currentTab"
       @change="onTabChange"
     ></u-tabs>
-    <!-- 疫情查询 -->
-    <view v-if="currentTab === 0">
+    <!-- 国内疫情 -->
+    <view v-if="currentTab === TABS_CONSTRAINTS.GUONEI">
+      <!-- yiqing list -->
+      <view v-if="chinaDetail">
+        <u-divider>昨日疫情</u-divider>
+        <u-card :show-head="false">
+          <view class="items" slot="body">
+            <view v-for="col in chinaSummaryCols" :key="col.key" class="item">
+              <text class="label">{{ col.label }}</text>
+              {{ chinaDetail.diseaseh5Shelf.chinaAdd[col.key] }}
+            </view>
+          </view>
+          <view class="foot" slot="foot">
+            <view>
+              <text class="label">省份数量: </text>
+              {{ chinaCities.length }}
+            </view>
+          </view>
+        </u-card>
+        <u-divider>地区详情</u-divider>
+        <u-select
+          v-model="showChinaCitySelect"
+          :list="chinaCities"
+          @confirm="confirmChinaCitySelect"
+          @cancel="showChinaCitySelect = false"
+        ></u-select>
+        <view class="city-select-item" @click="showChinaCitySelect = true">
+          当前城市: {{ currentChinaCity || "点击选择城市" }}
+        </view>
+        <u-card
+          v-for="(city, index) in filteredChinaDetailList"
+          :key="index"
+          :show-head="false"
+        >
+          <view class="items" slot="body">
+            <view v-for="col in chinaDetailCols" :key="col.key" class="item">
+              <text class="label">{{ col.label }}</text>
+              {{ city[col.key] }}
+            </view>
+          </view>
+        </u-card>
+        <view v-if="!filteredChinaDetailList.length" class="empty">
+          <u-empty text="没有搜索结果" mode="search"></u-empty>
+        </view>
+      </view>
+      <!-- yiqing empty list -->
+      <view v-else class="empty">
+        <u-empty text="没有搜索结果" mode="search"></u-empty>
+      </view>
+    </view>
+    <!-- 国际疫情 -->
+    <view v-if="currentTab === TABS_CONSTRAINTS.GUOJI">
       <!-- search -->
       <view class="search">
         <u-search
@@ -16,15 +66,8 @@
           :value="keyword"
           @change="handleKeywordChange"
         ></u-search>
-        <view
-          v-if="cityList.length > 0 && showAutoSearch"
-          class="search-auto-list"
-        >
-          <view
-            v-for="(city, index) in cityList"
-            :key="index"
-            class="search-auto-item"
-          >
+        <view v-if="cityList.length > 0 && showAutoSearch" class="search-auto-list">
+          <view v-for="(city, index) in cityList" :key="index" class="search-auto-item">
             <view class="search-auto-name" @click="searchDetail(city)">
               {{ city }}
             </view>
@@ -70,7 +113,7 @@
           <view class="foot" slot="foot">
             <view>
               <text class="label">更新时间:</text>
-              {{ new Date(yiqingDetail.updateTime).toLocaleString() }}
+              {{ formatTime(new Date(yiqingDetail.updateTime)) }}
             </view>
             <!-- <view>
               <text class="label"> 备注:</text>
@@ -78,7 +121,7 @@
             </view> -->
           </view>
         </u-card>
-        <u-divider>疫情详情</u-divider>
+        <u-divider>地区详情</u-divider>
         <u-card
           v-for="(city, index) in yiqingDetail.cities"
           :key="index"
@@ -137,7 +180,7 @@
       </view>
     </view>
     <!-- 防疫政策 -->
-    <view v-if="currentTab === 1">
+    <view v-if="currentTab === TABS_CONSTRAINTS.POLICY">
       <u-select
         v-model="showCitySelect"
         mode="mutil-column-auto"
@@ -146,7 +189,7 @@
         @cancel="cancelCitySelect"
       ></u-select>
       <view
-        class="from-to-item"
+        class="city-select-item"
         @click="
           showFromCitySelect = true;
           showCitySelect = true;
@@ -155,7 +198,7 @@
         出发城市: {{ fromCityLabel }}
       </view>
       <view
-        class="from-to-item"
+        class="city-select-item"
         @click="
           showToCitySelect = true;
           showCitySelect = true;
@@ -223,32 +266,32 @@
     </view>
     <!-- 疫情新闻 -->
     <!-- 疫情谣言 -->
-    <view v-if="currentTab === 2 || currentTab === 3">
+    <view
+      v-if="
+        currentTab === TABS_CONSTRAINTS.NEWS || currentTab === TABS_CONSTRAINTS.RUMORS
+      "
+    >
       <view v-if="news.list.length">
-        <u-card
-          v-for="(item, index) in news.list"
-          :key="index"
-          :title="item.title"
-        >
+        <u-card v-for="(item, index) in news.list" :key="index" :title="item.title">
           <view class="items" slot="body">
             <!-- 内容 -->
             <view class="item item-content">
-              {{ currentTab === 2 ? item.summary : item.body }}
+              {{ currentTab === TABS_CONSTRAINTS.NEWS ? item.summary : item.body }}
             </view>
-            <view v-if="currentTab === 2" class="item item-link">
+            <view v-if="currentTab === TABS_CONSTRAINTS.NEWS" class="item item-link">
               {{ item.sourceUrl }}
             </view>
           </view>
           <view class="foot" slot="foot">
-            <view v-if="currentTab === 2">
+            <view v-if="currentTab === TABS_CONSTRAINTS.NEWS">
               <text class="label width-100">消息来源: </text>
               {{ item.infoSource }}
             </view>
-            <view v-if="currentTab === 2">
+            <view v-if="currentTab === TABS_CONSTRAINTS.NEWS">
               <text class="label width-100">消息时间: </text>
-              {{ new Date(Number(item.pubDate)).toLocaleString() }}
+              {{ formatTime(new Date(Number(item.pubDate))) }}
             </view>
-            <view v-if="currentTab === 3">
+            <view v-if="currentTab === TABS_CONSTRAINTS.RUMORS">
               <text class="label width-100">消息辟谣: </text>
               {{ item.mainSummary }}
             </view>
@@ -263,6 +306,7 @@
 </template>
 <script>
 import {
+  fetchChinaDetail,
   fetchCityList,
   fetchYiqingDetail,
   fetchNews,
@@ -270,14 +314,11 @@ import {
   fetchPolicy,
 } from "@/util/cloud/yiqing";
 import { FANGYI_CITY_LIST } from "@/util/cloud/mock.js";
-import {
-  getLocalStorage,
-  setLocalStorage,
-  removeLocalStorage,
-} from "@/util/util";
+import { getLocalStorage, setLocalStorage, removeLocalStorage } from "@/util/util";
 import dayjs from "dayjs";
 export default {
   async onShow() {
+    this.fetchChinaDetailYiqing();
     this.allCityList = await fetchCityList();
   },
   data() {
@@ -285,12 +326,48 @@ export default {
       // tab
       currentTab: 0,
       tabs: [
-        { name: "疫情查询" },
+        { name: "国内疫情" },
+        { name: "国际疫情" },
         { name: "防疫政策" },
         { name: "疫情新闻" },
         { name: "疫情谣言" },
       ],
-      // 疫情查询
+      TABS_CONSTRAINTS: {
+        GUONEI: 0,
+        GUOJI: 1,
+        POLICY: 2,
+        NEWS: 3,
+        RUMORS: 4,
+      },
+      // 国内疫情
+      showChinaCitySelect: false,
+      currentChinaCity: "",
+      chinaCities: [],
+      chinaDetail: null,
+      chinaDetailList: [],
+      filteredChinaDetailList: [],
+      chinaSummaryCols: [
+        { key: "nowSevere", label: "新增危重" },
+        { key: "noInfect", label: "新增无症状" },
+        { key: "localConfirmH5", label: "新增本土" },
+        { key: "confirm", label: "新增确诊" },
+        { key: "heal", label: "新增治愈" },
+        // { key: "nowConfirm", label: "" },
+        { key: "suspect", label: "新增疑似" },
+        { key: "dead", label: "新增死亡" },
+        { key: "importedCase", label: "新增境外" },
+        // { key: "localConfirm", label: "本土确诊" },
+        // { key: "noInfectH5", label: "" },
+      ],
+      chinaDetailCols: [
+        { key: "city", label: "区域" },
+        { key: "confirmAdd", label: "新增确诊" },
+        { key: "nowConfirm", label: "现有确诊" },
+        { key: "confirm", label: "累计确诊" },
+        { key: "heal", label: "新增治愈" },
+        { key: "dead", label: "新增死亡" },
+      ],
+      // 国际疫情
       keyword: "",
       cityList: [],
       allCityList: [],
@@ -330,7 +407,11 @@ export default {
         num: 10,
         list: [],
       };
-      if ([2, 3].includes(this.currentTab)) {
+      if (
+        [this.TABS_CONSTRAINTS.NEWS, this.TABS_CONSTRAINTS.RUMORS].includes(
+          this.currentTab
+        )
+      ) {
         this.fetchNewsList();
       }
     },
@@ -342,7 +423,38 @@ export default {
     onTabChange(index) {
       this.currentTab = index;
     },
-    // 疫情查询
+    formatTime(date) {
+      return dayjs(date).format("YYYY-MM-DD HH:mm:ss");
+    },
+    // 国内疫情
+    async fetchChinaDetailYiqing() {
+      uni.showLoading({
+        title: "加载中",
+      });
+      this.chinaDetail = await fetchChinaDetail();
+      if (this.chinaDetail) {
+        const chinaCities = Array.from(
+          new Set(this.chinaDetail.statisGradeCityDetail.map((city) => city.province))
+        );
+        this.chinaCities = chinaCities.map((city) => {
+          return { label: city, value: city };
+        });
+        this.filteredChinaDetailList = this.chinaDetail.statisGradeCityDetail;
+        this.chinaDetailList = this.chinaDetail.statisGradeCityDetail;
+      }
+      uni.hideLoading();
+    },
+    confirmChinaCitySelect(value) {
+      this.currentChinaCity = value[0].value;
+      if (this.currentChinaCity) {
+        this.filteredChinaDetailList = this.chinaDetailList.filter(
+          (city) => city.province === this.currentChinaCity
+        );
+      } else {
+        this.filteredChinaDetailList = this.chinaDetailList;
+      }
+    },
+    // 国际疫情
     async handleKeywordChange(value) {
       this.keyword = value;
       this.showAutoSearch = true;
@@ -350,9 +462,7 @@ export default {
         if (!this.allCityList.length) {
           this.allCityList = await fetchCityList();
         }
-        this.cityList = this.allCityList.filter((city) =>
-          city.includes(this.keyword)
-        );
+        this.cityList = this.allCityList.filter((city) => city.includes(this.keyword));
       } else {
         this.cityList = [];
       }
@@ -418,7 +528,7 @@ export default {
       });
       const { page, num } = this.news;
       const list =
-        this.currentTab === 2
+        this.currentTab === this.TABS_CONSTRAINTS.NEWS
           ? await fetchNews(page, num)
           : await fetchRumors(page, num);
       this.news = { ...this.news, list };
@@ -489,7 +599,7 @@ export default {
   color: #d81e06;
 }
 
-.from-to-item {
+.city-select-item {
   margin: 16rpx 0;
   padding-left: 32rpx;
 }
