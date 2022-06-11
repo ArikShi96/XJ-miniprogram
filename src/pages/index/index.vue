@@ -68,7 +68,11 @@ import {
   fetchTodayHistory,
   fetchTodayNews,
 } from "@/util/cloud/index";
-import { getLocalStorage, setLocalStorage, remo } from "@/util/util";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  removeLocalStorage,
+} from "@/util/util";
 import PasswordIcon from "@/static/img/icon/password.png";
 import MemoIcon from "@/static/img/icon/memo.png";
 import ChoujiangIcon from "@/static/img/icon/抽奖.png";
@@ -77,6 +81,7 @@ import WeatherIcon from "@/static/img/icon/weather.png";
 import WaitingIcon from "@/static/img/icon/waiting2.png";
 import AdminIcon from "@/static/img/icon/admin.png";
 import MaiCaiIcon from "@/static/img/icon/买菜.png";
+import YiQingIcon from "@/static/img/icon/疫情.png";
 export default {
   async onShow() {
     uni.showLoading({
@@ -101,13 +106,13 @@ export default {
     return {
       AdminIcon,
       list: [
+        { icon: YiQingIcon, text: "疫情相关", url: "/pages/yiqing/index" },
         { icon: MaiCaiIcon, text: "买菜比价", url: "/pages/maicai/index" },
+        { icon: WeatherIcon, text: "天气", url: "/pages/weather/index" },
         { icon: PasswordIcon, text: "密码管理", url: "/pages/password/index" },
         { icon: MemoIcon, text: "便签", url: "/pages/memo/index" },
         { icon: ChoujiangIcon, text: "抽签", url: "/pages/chouqian/index" },
         { icon: RememberIcon, text: "纪念日", url: "/pages/remember/index" },
-        { icon: WeatherIcon, text: "天气", url: "/pages/weather/index" },
-        { icon: WaitingIcon, text: "敬请期待" },
         { icon: WaitingIcon, text: "敬请期待" },
       ],
       // 首页数据
