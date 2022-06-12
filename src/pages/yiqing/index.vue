@@ -66,8 +66,15 @@
           :value="keyword"
           @change="handleKeywordChange"
         ></u-search>
-        <view v-if="cityList.length > 0 && showAutoSearch" class="search-auto-list">
-          <view v-for="(city, index) in cityList" :key="index" class="search-auto-item">
+        <view
+          v-if="cityList.length > 0 && showAutoSearch"
+          class="search-auto-list"
+        >
+          <view
+            v-for="(city, index) in cityList"
+            :key="index"
+            class="search-auto-item"
+          >
             <view class="search-auto-name" @click="searchDetail(city)">
               {{ city }}
             </view>
@@ -268,17 +275,27 @@
     <!-- 疫情谣言 -->
     <view
       v-if="
-        currentTab === TABS_CONSTRAINTS.NEWS || currentTab === TABS_CONSTRAINTS.RUMORS
+        currentTab === TABS_CONSTRAINTS.NEWS ||
+          currentTab === TABS_CONSTRAINTS.RUMORS
       "
     >
       <view v-if="news.list.length">
-        <u-card v-for="(item, index) in news.list" :key="index" :title="item.title">
+        <u-card
+          v-for="(item, index) in news.list"
+          :key="index"
+          :title="item.title"
+        >
           <view class="items" slot="body">
             <!-- 内容 -->
             <view class="item item-content">
-              {{ currentTab === TABS_CONSTRAINTS.NEWS ? item.summary : item.body }}
+              {{
+                currentTab === TABS_CONSTRAINTS.NEWS ? item.summary : item.body
+              }}
             </view>
-            <view v-if="currentTab === TABS_CONSTRAINTS.NEWS" class="item item-link">
+            <view
+              v-if="currentTab === TABS_CONSTRAINTS.NEWS"
+              class="item item-link"
+            >
               {{ item.sourceUrl }}
             </view>
           </view>
@@ -314,7 +331,11 @@ import {
   fetchPolicy,
 } from "@/util/cloud/yiqing";
 import { FANGYI_CITY_LIST } from "@/util/cloud/mock.js";
-import { getLocalStorage, setLocalStorage, removeLocalStorage } from "@/util/util";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  removeLocalStorage,
+} from "@/util/util";
 import dayjs from "dayjs";
 export default {
   async onShow() {
@@ -431,10 +452,18 @@ export default {
       uni.showLoading({
         title: "加载中",
       });
-      this.chinaDetail = await fetchChinaDetail();
+      const cacheKey = `${this.today}-china-yiqing`;
+      let chinaDetail = await getLocalStorage(cacheKey);
+      if (!chinaDetail) {
+        chinaDetail = await fetchChinaDetail();
+        await setLocalStorage(cacheKey, chinaDetail);
+      }
+      this.chinaDetail = chinaDetail;
       if (this.chinaDetail) {
         const chinaCities = Array.from(
-          new Set(this.chinaDetail.statisGradeCityDetail.map((city) => city.province))
+          new Set(
+            this.chinaDetail.statisGradeCityDetail.map((city) => city.province)
+          )
         );
         this.chinaCities = chinaCities.map((city) => {
           return { label: city, value: city };
@@ -462,7 +491,9 @@ export default {
         if (!this.allCityList.length) {
           this.allCityList = await fetchCityList();
         }
-        this.cityList = this.allCityList.filter((city) => city.includes(this.keyword));
+        this.cityList = this.allCityList.filter((city) =>
+          city.includes(this.keyword)
+        );
       } else {
         this.cityList = [];
       }

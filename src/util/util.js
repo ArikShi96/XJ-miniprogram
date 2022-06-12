@@ -16,7 +16,7 @@ export async function getLocalStorage(key) {
   });
 }
 
-export async function setLocalStorage(key, data) {
+export async function setLocalStorage(key, data, skipError = true) {
   return new Promise((resolve, reject) => {
     uni.setStorage({
       key,
@@ -25,13 +25,13 @@ export async function setLocalStorage(key, data) {
         resolve();
       },
       fail(err) {
-        reject(err);
+        skipError ? resolve() : reject(err);
       },
     });
   });
 }
 
-export async function removeLocalStorage(key) {
+export async function removeLocalStorage(key, skipError = true) {
   return new Promise((resolve, reject) => {
     uni.removeStorage({
       key,
@@ -39,7 +39,7 @@ export async function removeLocalStorage(key) {
         resolve();
       },
       fail(err) {
-        reject(err);
+        skipError ? resolve() : reject(err);
       },
     });
   });

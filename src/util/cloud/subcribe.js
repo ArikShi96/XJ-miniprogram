@@ -1,3 +1,7 @@
+// 日程提醒
+export const WEATHER_TEMPLATE_ID = "3FAKZcJ6u2hqPceD4385tiIEwbYLH9VK9pYysK4lymk";
+// 纪念日提醒
+export const REMEMBER_TEMPLATE_ID = "9Ng25oXuoF-HyilFkGd87Pe6FAIVAUeyS7w5EYX87WY";
 // 订阅消息
 export function subscribeMsg(tmplId) {
   return new Promise((resolve, reject) => {

@@ -46,10 +46,9 @@
 <script>
 import { rememberAdd, rememberList } from "@/util/cloud/remember.js";
 import { uniDatetimePicker } from "@dcloudio/uni-ui";
-import { subscribeMsg } from "@/util/cloud/subcribe.js";
+import { subscribeMsg, REMEMBER_TEMPLATE_ID } from "@/util/cloud/subcribe.js";
 import dayjs from "dayjs";
 import { generateUuid } from "@/util/util.js";
-const tmplId = "9Ng25oXuoF-HyilFkGd87Pe6FAIVAUeyS7w5EYX87WY";
 export default {
   components: { uniDatetimePicker },
   data() {
@@ -133,7 +132,7 @@ export default {
     async subscribe(data) {
       try {
         if (data.notify) {
-          await subscribeMsg(tmplId);
+          await subscribeMsg(WEATHER_TEMPLATE_ID);
         }
       } catch (err) {}
       setTimeout(() => {

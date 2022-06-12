@@ -15,17 +15,20 @@
   </view>
 </template>
 <script>
-import { subscribeMsg, cloudSendMsg } from "@/util/cloud/subcribe.js";
-const rememberTmplId = "9Ng25oXuoF-HyilFkGd87Pe6FAIVAUeyS7w5EYX87WY";
-const weatherTmplId = "3FAKZcJ6u2hqPceD4385tiIEwbYLH9VK9pYysK4lymk";
+import {
+  subscribeMsg,
+  cloudSendMsg,
+  REMEMBER_TEMPLATE_ID,
+  WEATHER_TEMPLATE_ID,
+} from "@/util/cloud/subcribe.js";
 export default {
   methods: {
     async triggerMessage() {
-      await subscribeMsg(rememberTmplId);
+      await subscribeMsg(REMEMBER_TEMPLATE_ID);
       cloudSendMsg("sendTemplateMessage");
     },
     async triggerWeatherMessage() {
-      await subscribeMsg(weatherTmplId);
+      await subscribeMsg(WEATHER_TEMPLATE_ID);
       cloudSendMsg("sendWeatherMessage");
     },
   },

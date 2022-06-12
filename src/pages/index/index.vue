@@ -85,10 +85,10 @@ import YiQingIcon from "@/static/img/icon/疫情.png";
 import FoodIcon from "@/static/img/icon/菜谱.png";
 export default {
   async onShow() {
+    // await this.checkSession();
     uni.showLoading({
       title: "加载中",
     });
-    // await this.checkSession();
     const homePageData = (await getLocalStorage(this.today)) || {};
     let { history, news, jitang } = homePageData;
     if (!history) {

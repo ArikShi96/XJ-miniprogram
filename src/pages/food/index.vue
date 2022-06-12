@@ -24,7 +24,7 @@
       ></Step>
       <view
         v-if="currentStepIndex === 0 || currentStepIndex === steps.length - 1"
-        class="food-step"
+        class="food-step-wrap"
       >
         <u-card
           :title="list[currentIndex].name"
@@ -33,17 +33,16 @@
         >
           <view class="items" slot="body">
             <view v-for="col in foodSummaryCols" :key="col.key" class="item">
-              <text class="label">
-                {{ col.label }}
-              </text>
-              : {{ list[currentIndex][col.key] }}
+              <text class="label"> {{ col.label }}: </text>
+              {{ list[currentIndex][col.key] }}
             </view>
-            <view class="item item-content">
-              {{ list[currentIndex].content }}
-            </view>
+            <view
+              class="item item-content"
+              v-html="list[currentIndex].content"
+            />
           </view>
           <view class="foot" slot="foot">
-            <view>
+            <view class="foot-item">
               <text class="label">标签:</text>
               <u-tag
                 class="foot-tag"
@@ -51,6 +50,17 @@
                 :key="tag"
                 :text="tag"
                 type="primary"
+                size="mini"
+              />
+            </view>
+            <view class="foot-item">
+              <text class="label">材料:</text>
+              <u-tag
+                class="foot-tag"
+                v-for="(item, index) in list[currentIndex].material"
+                :key="index"
+                :text="`${item.mname}${item.amount}`"
+                type="info"
                 size="mini"
               />
             </view>
@@ -162,10 +172,14 @@ export default {
   }
   &.item-content {
     text-align: justify;
+    margin-top: 16rpx;
   }
 }
 .foot {
   font-size: 24rpx;
+  .foot-item {
+    margin-bottom: 16rpx;
+  }
   .label {
     display: inline-block;
     margin-right: 8rpx;
@@ -176,12 +190,18 @@ export default {
 }
 
 .food-content {
+  position: relative;
+  height: calc(100vh - 94rpx);
   .food-steps {
     position: absolute;
+    height: calc(100vh - 74rpx);
+    overflow: auto;
   }
-  .food-step {
+  .food-step-wrap {
     padding-left: 20%;
     padding-top: 40rpx;
+    max-height: 100%;
+    overflow: auto;
   }
   .food-step-content {
     margin-bottom: 32rpx;

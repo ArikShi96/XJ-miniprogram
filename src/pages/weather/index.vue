@@ -38,8 +38,7 @@ import {
   weatherRemove,
   weatherUpdate,
 } from "@/util/cloud/weather.js";
-import { subscribeMsg } from "@/util/cloud/subcribe.js";
-const tmplId = "9Ng25oXuoF-HyilFkGd87Pe6FAIVAUeyS7w5EYX87WY";
+import { subscribeMsg, WEATHER_TEMPLATE_ID } from "@/util/cloud/subcribe.js";
 export default {
   async onLoad() {},
   async onShow() {
@@ -62,14 +61,14 @@ export default {
       uni.hideLoading();
     },
     async handleChange(event, uuid) {
-      try {
-        if (event.target.value) {
-          await subscribeMsg(tmplId);
-        }
-        await weatherUpdate(uuid, {
-          notify: event.target.value,
-        });
-      } catch (err) {}
+      // try {
+      if (event.target.value) {
+        await subscribeMsg(WEATHER_TEMPLATE_ID);
+      }
+      await weatherUpdate(uuid, {
+        notify: event.target.value,
+      });
+      // } catch (err) {}
     },
     handleRemove(uuid) {
       const self = this;

@@ -1,5 +1,5 @@
 import request, { encodeUrlWithParams } from "@/util/request/request.ts";
-import { MOCK_POLICY_DATA } from "./mock";
+import { MOCK_POLICY_DATA, WORLD_CITY_LIST } from "./mock";
 
 const QQ_BASE_URL = "https://api.inews.qq.com";
 
@@ -21,9 +21,11 @@ export async function fetchChinaDetail() {
 
 export async function fetchCityList() {
   try {
-    const res = await request.get(
-      encodeUrlWithParams(`${DING_XIANG_BASE_URL}/provinceName`, {})
-    );
+    // const res = await request.get(
+    //   encodeUrlWithParams(`${DING_XIANG_BASE_URL}/provinceName`, {})
+    // );
+    // 固定列表, 无需走请求
+    const res = { results: WORLD_CITY_LIST };
     return res.results || [];
   } catch (err) {
     return [];
