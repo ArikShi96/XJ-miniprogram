@@ -16,6 +16,10 @@ npm run dev:mp-weixin
 npm run build:mp-weixin
 ```
 
+## Env
+
+node version: 14.18.1
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -10,6 +10,11 @@ export async function fetchFoodList(keyword, num = 20) {
     );
     return res.result.result.list || [];
   } catch (err) {
+    uni.showToast({
+      title: err.msg,
+      icon: "error",
+      duration: 1000,
+    });
     return [];
   }
 }

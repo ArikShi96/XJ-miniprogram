@@ -102,13 +102,15 @@ export default {
   },
   watch: {
     currentIndex() {
-      this.steps = [
-        { name: "准备" },
-        ...this.list[this.currentIndex].process.map((process, index) => {
-          return { name: `步骤${index + 1}` };
-        }),
-        { name: "完成" },
-      ];
+      if (this.list && this.list.length > 0) {
+        this.steps = [
+          { name: "准备" },
+          ...this.list[this.currentIndex].process.map((process, index) => {
+            return { name: `步骤${index + 1}` };
+          }),
+          { name: "完成" },
+        ];
+      }
     },
     currentStepIndex() {
       const self = this;
