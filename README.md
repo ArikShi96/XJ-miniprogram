@@ -16,9 +16,11 @@ npm run dev:mp-weixin
 npm run build:mp-weixin
 ```
 
-## Env
+### Env
 
+```
 node version: 14.18.1
+```
 
 ### Customize configuration
 
