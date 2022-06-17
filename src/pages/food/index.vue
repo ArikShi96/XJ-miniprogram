@@ -67,7 +67,7 @@
           </view>
         </u-card>
       </view>
-      <view v-else class="food-step">
+      <view v-else class="food-step-wrap">
         <view class="food-step-content">
           {{ list[currentIndex].process[currentStepIndex - 1].pcontent }}
         </view>
